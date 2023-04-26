@@ -12,7 +12,8 @@ public class NeigborhoodLibraryMain {
 
         // Welcome User &
         System.out.println("Greetings! Welcome to the Neighborhood Library.");
-        while (true) { //loop until user says no
+        boolean done = false;
+        while (!done) { //loop until user says no
             System.out.println("Would you like choose a book from us today? (Enter yes/no)");
             // Read users response
             String userResponse = scanner.nextLine();
@@ -34,12 +35,13 @@ public class NeigborhoodLibraryMain {
 
             // Parse their choice and get it from the list
             System.out.println("\nWhat is the Product ID of your book?");
-            String selectedProductID = scanner.nextLine();
+            String selectedISBN = scanner.nextLine();
+
             Books selectedBook = null;
 
-            for (Books currentBookItemInListInTheLoop : bookInventory) {
-                if (selectedProductID.equals(currentBookItemInListInTheLoop.getIsbn())) {
-                    selectedBook = currentBookItemInListInTheLoop;
+            for (Books b : bookInventory) {
+                if (selectedISBN.equals(b.getIsbn())) {
+                    selectedBook = b;
                     // Tell the user they've made a great choice.
                     System.out.println("Voila! I have your book....Great choice!");
                     break;
@@ -58,20 +60,15 @@ public class NeigborhoodLibraryMain {
                 String userName = scanner.nextLine();
 
 
-                System.out.println("Okay " + userName + "lets get you out of here!");
-//                selectedBook.checkOut(userName);
-
-
-
-
+                System.out.println("Okay " + userName + " lets get you out of here!");
+                done = true;
 
 
             } else if (acceptBook.equalsIgnoreCase("No")) {
                 System.out.println("Whoops! Feel free to check out some of our other books!");
-
-
-
             }
+
+            System.out.println("\nYou have successfully checked out" + selectedBook.getTitle());
         }
     }
 }
